@@ -6,6 +6,7 @@ from flask import Flask, request , render_template, session,redirect,url_for
 import requests
 from models.user import Users, Session
 from models.programs import Programs
+from groq import Groq
 
 app = Flask(__name__)
 mysession = Session()
@@ -26,29 +27,24 @@ def service():
 
 @app.route('/service/generated', methods=['GET', 'POST'], strict_slashes=False)
 def AI_service():
-    url = "https://api.openai.com/v1/chat/completions"
     if request.method == 'POST':
         prompt = request.form['prompt']
 
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer your_api_key_here"
-    }
-    data = {
-        "messages": [
-            {
-                "role": "system",
-                "content": "User: " + prompt
-            }
-        ],
+    client = Groq(
+            api_key="your_api_key",
+        )
+        
+    chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model="llama3-8b-8192",
+        )
+    data = chat_completion.choices[0].message.content
 
-        "max_tokens": 1000,
-        "model": "gpt-3.5-turbo"
-    }
-
-    response = requests.post(url, headers=headers, json=data)
-    response_data = response.json()
-    data = response_data["choices"][0]["message"]["content"]
     return render_template('content/AI_Genrated.html',data=data)
 
 @app.route('/service/save', methods=['GET', 'POST'], strict_slashes=False)
