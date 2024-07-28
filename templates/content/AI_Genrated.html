@@ -1,0 +1,16 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<section class="service_section layout_padding">
+    <div class="container">
+      <div class="service_container">
+          <div class="AI-yellow-paper">
+            <form action="/service/save" method="post">
+              <input type="text" hidden name="user_id" value="1">
+              <textarea class="AI-text-box" name="program_text">{{data}}</textarea>
+              <button class="AI-green-button">Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+  </section>
+{% endblock %}

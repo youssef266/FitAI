@@ -1,0 +1,33 @@
+.AI-yellow-paper {
+    background-color: #fffae6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 80%;
+  }
+
+  .AI-text-box {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    min-height: 290px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+    /* Styling for the green button */
+  .AI-green-button {
+      background-color: #ffc107;
+      color: rgb(8, 8, 8);
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 12px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  
+    /* Hover effect for the green button */
+  .AI-green-button:hover {
+      background-color: #45a049;
+    }

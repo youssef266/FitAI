@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head> <!-- headstart -->
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+ 
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>FitAi</title>
+
+  
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+  
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/bootstrap.css') }}" />
+
+ 
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Dosis:400,600,700|Poppins:400,600,700&display=swap"
+    rel="stylesheet" />
+  
+  <link href="{{ url_for('static', filename='styles/style.css')}}" rel="stylesheet" />
+ 
+  <link href="{{ url_for('static', filename='styles/responsive.css')}}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='styles/AI_service.css')}}" rel="stylesheet" />
+  <link rel='shortcut icon' href="{{ url_for('static', filename='images/logo.png') }}" />
+</head> <!-- head ends -->
+
+<body>
+  <div class="hero_area">
+    
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="/">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" />
+            <span>
+              FitAi
+            </span>
+          </a>
+        </nav>
+      </div>
+
+    </header>
+   
+    <section class=" slider_section position-relative">
+      <div class="container">
+        <div class="custom_nav2">
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div class="d-flex  flex-column flex-lg-row align-items-center">
+                <ul class="navbar-nav  ">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/about">About </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/service">Services </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/register">Register</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                  </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                  <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+                </form>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    {%block content%}
+        {# This is the content block that will be filled in by the child template #}
+    {%endblock%}
+  <section class="info_section layout_padding2-top">
+    <div class="container">
+      <div class="info_form">
+        <h4>
+          Our Newsletter
+        </h4>
+        <form action="">
+          <input type="text" placeholder="Enter your email">
+          <div class="d-flex justify-content-end">
+            <button>
+              subscribe
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <h6>
+            About FitAi
+          </h6>
+          <p>
+            Welcome to FitAi, your destination for generated programs powered by artificial intelligence
+            to help you achieve your fitness goals.
+          </p>
+        </div>
+        <div class="col-md-2 offset-md-1">
+          <h6>
+            Menus
+          </h6>
+          <ul>
+            <li class=" active">
+              <a class="" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="">
+              <a class="" href="/about">About </a>
+            </li>
+            <li class="">
+              <a class="" href="/service">Services </a>
+            </li>
+            <li class="">
+              <a class="" href="/register ">Register</a>
+            </li>
+            <li class="">
+              <a class="" href="/login">Login</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h6>
+          
+            Contact Us
+          </h6>
+          <div class="info_link-box">
+            <a href="">
+             
+            </a>
+            <a href="">
+              <img src="{{ url_for('static', filename='images/call-white.png') }}" alt="">
+              <span>+01009018315</span>
+            </a>
+            <a href="">
+              <img src="{{ url_for('static', filename='images/mail-white.png') }}" alt="">
+              <span> meranhany25@gmail.com</span>
+            </a>
+          </div>
+         
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+
+ 
+  <section class="container-fluid footer_section ">
+    <p>
+     
+      
+    </p>
+  </section>
+  
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+  <script>
+    function openNav() {
+      document.getElementById("myNav").classList.toggle("menu_width");
+      document
+        .querySelector(".custom_menu-btn")
+        .classList.toggle("menu_btn-style");
+    }
+  </script>
+</body>
+
+</html>

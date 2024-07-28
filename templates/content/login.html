@@ -1,0 +1,35 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+  <section class="contact_section layout_padding">
+    <div class="container">
+      <div class="layout_padding2-top">
+        <div class="row">
+          <div class="col-md-6 ">
+            <form action="/login" method="POST">
+              <div class="contact_form-container">
+                <div>
+                  <div>
+                    <input type="email" placeholder="Email" name="email"/>
+                  </div>
+                  <div>
+                    <input type="password" placeholder="Password" name="password"/>
+                  </div>
+                  <div class="mt-5">
+                    <button type="submit">
+                      Login
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <div class="img-box">
+                <img src="{{ url_for('static', filename='images/about-img.png') }}" alt="">
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
