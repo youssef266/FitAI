@@ -5,7 +5,12 @@
       <div class="layout_padding2-top">
         <div class="row">
           <div class="col-md-6 ">
-            <form action="/login" method="POST">
+            {%if error%}
+              <div class="alert alert-danger" role="alert">
+                {{error}}
+              </div>
+            {%endif%}
+            <form action="/login_save" method="POST">
               <div class="contact_form-container">
                 <div>
                   <div>

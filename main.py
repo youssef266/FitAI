@@ -85,7 +85,12 @@ def submit():
         return render_template('content/register.html')
 
 @app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
+
 def login():
+    return render_template('content/login.html')
+
+@app.route('/login_save', methods=['GET', 'POST'], strict_slashes=False)
+def login_save():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
@@ -95,10 +100,8 @@ def login():
         if user:
             session['user_id'] = user.id
             return render_template('content/home.html')
-        
-        return "Invalid email or password. Please try again."
-    
-    return render_template('content/login.html')
+        else:
+            return render_template('content/login.html', error ='Invalid email or password. Please try again.')
 
 
 
