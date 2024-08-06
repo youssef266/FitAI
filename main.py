@@ -99,7 +99,7 @@ def login_save():
 
         if user:
             session['user_id'] = user.id
-            return render_template('content/home.html')
+            return render_template('content/home.html', name=user.name)
         else:
             return render_template('content/login.html', error ='Invalid email or password. Please try again.')
 
