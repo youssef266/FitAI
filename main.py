@@ -15,7 +15,16 @@ app.secret_key = 'thisissecret'
 @app.route('/home', strict_slashes=False)
 @app.route('/', strict_slashes=False)
 def home():
-    return render_template('content/home.html')
+    if 'user_id' not in session:
+        return render_template('content/home.html')
+
+    userid = session['user_id']
+    user = mysession.query(Users).filter_by(id=userid).first()
+    
+    if user:
+        return render_template('content/home.html', name=user.name)
+    else:
+        return render_template('content/home.html')
 
 @app.route('/about', strict_slashes=False)
 def about():
