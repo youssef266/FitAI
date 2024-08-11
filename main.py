@@ -23,8 +23,6 @@ def home():
     
     if user:
         return render_template('content/home.html', name=user.name)
-    else:
-        return render_template('content/home.html')
 
 @app.route('/about', strict_slashes=False)
 def about():
