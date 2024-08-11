@@ -86,7 +86,7 @@ def submit():
         mysession.add(new_user)
         mysession.commit()
 
-        return render_template('content/login.html')
+        return render_template('content/home.html')
     
     if request.method == 'GET':
         return render_template('content/register.html')
@@ -111,6 +111,11 @@ def login_save():
             return render_template('content/login.html', error ='Invalid email or password. Please try again.')
 
 
+@app.route('/account', strict_slashes=False)
+def account():
+    userid = session['user_id']
+    user = mysession.query(Users).filter_by(id=userid).first()
+    return render_template('content/account.html',name = user.name , email = user.email , age = user.age )
 
 
 if __name__ == "__main__":
