@@ -86,7 +86,7 @@ def submit():
         mysession.add(new_user)
         mysession.commit()
 
-        return render_template('content/home.html')
+        return render_template('content/login.html')
     
     if request.method == 'GET':
         return render_template('content/register.html')
