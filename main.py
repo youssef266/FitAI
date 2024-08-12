@@ -3,7 +3,6 @@
 Flask App that integrates with AirBnB static HTML Template
 """
 from flask import Flask, request , render_template, session,redirect,url_for
-import requests
 from models.user import Users, Session
 from models.programs import Programs
 from groq import Groq
