@@ -69,7 +69,7 @@ def AI_service():
         )
     data = chat_completion.choices[0].message.content
 
-    return render_template('content/AI_Genrated.html',data=data, name=user.name)
+    return render_template('content/AI_Genrated.html',data=data, name=user.name, user_id=user.id)
 
 @app.route('/service/save', methods=['GET', 'POST'], strict_slashes=False)
 def service_save():
