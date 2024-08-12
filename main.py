@@ -41,12 +41,16 @@ def service():
     userid = session['user_id']
     user = mysession.query(Users).filter_by(id=userid).first()
 
-    return render_template('content/service.html', name=user.name)
+    return render_template('content/service.html', name=user.name , age=user.age , gender = user.gender)
 
 @app.route('/service/generated', methods=['GET', 'POST'], strict_slashes=False)
 def AI_service():
     if request.method == 'POST':
-        prompt = request.form['prompt']
+        program_type = request.form['program_type']
+        name = request.form['user_name']
+        age = request.form['user_age']
+        gender = request.form['user_gender']
+        prompt = f"give to me a. {program_type} my name is. {name} my age is. {age} my gender is. {gender}"
 
     if 'user_id' not in session:
         return render_template('content/AI_Genrated.html')

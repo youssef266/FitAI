@@ -8,7 +8,10 @@
             <form action="/service/generated" method="post">
               <div class="contact_form-container">
                 <div>
-                  <input type="text" id="prompt" name="prompt" placeholder="prompt" required><br><br>
+                  <input type="text" id="program_type" name="program_type" placeholder="program_type" required><br><br>
+                  <input type="hidden" id="user_name" name="user_name" value="{{name}}">
+                  <input type="hidden" id="user_age" name="user_age" value="{{age}}">
+                  <input type="hidden" id="user_gender" name="user_gender" value="{{gender}}">
                   <div class="mt-5">
                     <button type="submit">
                       Generate
