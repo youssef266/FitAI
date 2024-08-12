@@ -21,22 +21,40 @@ def home():
     userid = session['user_id']
     user = mysession.query(Users).filter_by(id=userid).first()
     
-    if user:
-        return render_template('content/home.html', name=user.name)
+
+    return render_template('content/home.html', name=user.name)
 
 @app.route('/about', strict_slashes=False)
 def about():
-    return render_template('content/about.html')
+    if 'user_id' not in session:
+        return render_template('content/about.html')
+
+    userid = session['user_id']
+    user = mysession.query(Users).filter_by(id=userid).first()
+    
+    return render_template('content/about.html', name=user.name)
 
 @app.route('/service', methods=['GET', 'POST'], strict_slashes=False)
 def service():
-    return render_template('content/service.html')
+    if 'user_id' not in session:
+        return render_template('content/service.html')
+
+    userid = session['user_id']
+    user = mysession.query(Users).filter_by(id=userid).first()
+
+    return render_template('content/service.html', name=user.name)
 
 @app.route('/service/generated', methods=['GET', 'POST'], strict_slashes=False)
 def AI_service():
     if request.method == 'POST':
         prompt = request.form['prompt']
 
+    if 'user_id' not in session:
+        return render_template('content/AI_Genrated.html')
+
+    userid = session['user_id']
+    user = mysession.query(Users).filter_by(id=userid).first()
+    
     client = Groq(
             api_key="your_api_key",
         )
@@ -52,7 +70,7 @@ def AI_service():
         )
     data = chat_completion.choices[0].message.content
 
-    return render_template('content/AI_Genrated.html',data=data)
+    return render_template('content/AI_Genrated.html',data=data, name=user.name)
 
 @app.route('/service/save', methods=['GET', 'POST'], strict_slashes=False)
 def service_save():
@@ -66,8 +84,13 @@ def service_save():
     return redirect(url_for('service'))
 
 @app.route('/register', strict_slashes=False)
-def register():    
-    return render_template('content/register.html')
+def register():
+    if 'user_id' not in session:
+        return render_template('content/register.html')
+
+    userid = session['user_id']
+    user = mysession.query(Users).filter_by(id=userid).first()    
+    return render_template('content/register.html', name=user.name)
     
 @app.route('/register/submit', methods=['GET', 'POST'], strict_slashes=False)
 def submit():
@@ -94,7 +117,12 @@ def submit():
 @app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 
 def login():
-    return render_template('content/login.html')
+    if 'user_id' not in session:
+        return render_template('content/login.html')
+
+    userid = session['user_id']
+    user = mysession.query(Users).filter_by(id=userid).first()
+    return render_template('content/login.html', name=user.name)
 
 @app.route('/login_save', methods=['GET', 'POST'], strict_slashes=False)
 def login_save():
@@ -110,6 +138,10 @@ def login_save():
         else:
             return render_template('content/login.html', error ='Invalid email or password. Please try again.')
 
+@app.route('/logout', methods=['GET', 'POST'],strict_slashes=False)
+def logout():
+    session.pop('user_id', None)
+    return render_template('content/home.html')
 
 @app.route('/account', strict_slashes=False)
 def account():
