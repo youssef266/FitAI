@@ -5,19 +5,19 @@
     <div class="layout_padding2-top">
       <div class="row">
         <div class="col-md-6 ">
-          <form action="/register/submit" method="POST">
+          <form action="/edit/submit" method="POST">
             <div class="contact_form-container">
               <div>
-                <input type="text" placeholder="Name" name="name" required/>
+                <input type="text" placeholder="Name" name="name" value="{{name}}" required/>
               </div>
               <div>
-                <input type="email" placeholder="Email" name="email" required/>
+                <input type="email" placeholder="Email" name="email" value="{{email}}" required/>
               </div>
               <div>
-                <input type="text" placeholder="Age" name="age" required/>
+                <input type="text" placeholder="Age" name="age" value="{{age}}" required/>
               </div>
               <div>
-                <input type="text" placeholder="Gender" name="gender" required/>
+                <input type="text" placeholder="Gender" name="gender" value="{{gender}}" required/>
               </div>
               <div>
                 <input type="password" placeholder="Password" name="password" required/>
@@ -27,7 +27,7 @@
               </div>
               <div class="">
                 <button type="submit">
-                  Register
+                  Edit
                 </button>
               </div>
             </div>

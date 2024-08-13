@@ -2,7 +2,7 @@
 """
 Flask App that integrates with AirBnB static HTML Template
 """
-from flask import Flask, request , render_template, session,redirect,url_for
+from flask import Flask, request , render_template, session,redirect,url_for,flash
 from models.user import Users, Session
 from models.programs import Programs
 from groq import Groq
@@ -116,6 +116,32 @@ def submit():
     
     if request.method == 'GET':
         return render_template('content/register.html')
+
+@app.route('/edit', methods=['GET', 'POST'], strict_slashes=False)
+def edit():
+    if 'user_id' not in session:
+        return render_template('content/edit.html')
+    userid = session['user_id']
+    user = mysession.query(Users).filter_by(id=userid).first()
+    return render_template('content/edit.html', name = user.name, email = user.email, age = user.age, gender = user.gender)
+
+@app.route('/edit/submit', methods=['GET', 'POST'], strict_slashes=False)
+def edit_submit():
+    userid = session['user_id']
+    user_to_update = mysession.query(Users).filter_by(id=userid).first()
+    if user_to_update:
+        user_to_update.name = request.form['name']
+        user_to_update.email = request.form['email']
+        user_to_update.age = request.form['age']
+        user_to_update.gender = request.form['gender']
+        user_to_update.password = request.form['password']
+        user_to_update.conf_password = request.form['conf_password']
+        mysession.commit()
+        if user_to_update.password != user_to_update.conf_password:
+            return "Password and confirmation password do not match. Please try again."
+    
+    flash('User updated successfully!', 'success')
+    return redirect(url_for('account'))        
 
 @app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 
