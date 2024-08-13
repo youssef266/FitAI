@@ -5,19 +5,24 @@
     <div class="layout_padding2-top">
       <div class="row">
         <div class="col-md-6 ">
+          {%if error%}
+          <div class="alert alert-danger" role="alert">
+            {{error}}
+          </div>
+        {%endif%}
           <form action="/register/submit" method="POST">
             <div class="contact_form-container">
               <div>
-                <input type="text" placeholder="Name" name="name" required/>
+                <input type="text" placeholder="Name" name="name" required {%if new_name %} value={{new_name}} {% endif %}/>
               </div>
               <div>
-                <input type="email" placeholder="Email" name="email" required/>
+                <input type="email" placeholder="Email" name="email" required {%if new_email %} value={{new_email}} {% endif %}/>
               </div>
               <div>
-                <input type="text" placeholder="Age" name="age" required/>
+                <input type="text" placeholder="Age" name="age" required {%if new_age %} value={{new_age}} {% endif %}/>
               </div>
               <div>
-                <input type="text" placeholder="Gender" name="gender" required/>
+                <input type="text" placeholder="Gender" name="gender" required {%if new_gender %} value={{new_gender}} {% endif %}/>
               </div>
               <div>
                 <input type="password" placeholder="Password" name="password" required/>

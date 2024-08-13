@@ -5,6 +5,11 @@
     <div class="layout_padding2-top">
       <div class="row">
         <div class="col-md-6 ">
+        {%if error%}
+            <div class="alert alert-danger" role="alert">
+              {{error}}
+            </div>
+          {%endif%}
           <form action="/edit/submit" method="POST">
             <div class="contact_form-container">
               <div>
@@ -20,10 +25,10 @@
                 <input type="text" placeholder="Gender" name="gender" value="{{gender}}" required/>
               </div>
               <div>
-                <input type="password" placeholder="Password" name="password" required/>
+                <input type="hidden" placeholder="Password" name="password" value="{{password}}" required/>
               </div>
               <div>
-                <input type="password" placeholder="Confirm Password" name="conf_password" required/>
+                <input type="hidden" placeholder="Confirm Password" name="conf_password" value="{{conf_password}}" required/>
               </div>
               <div class="">
                 <button type="submit">

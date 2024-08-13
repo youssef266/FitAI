@@ -106,11 +106,11 @@ def submit():
         gender = request.form['gender']
 
         if password != conf_password:
-            return "Password and confirmation password do not match. Please try again."
-
-        new_user = Users(name=name, email=email, password=password, conf_password=conf_password, age=age, gender=gender)
-        mysession.add(new_user)
-        mysession.commit()
+            return render_template('content/register.html', error ='Invalid email or password. Please try again.', new_name=name, new_email=email,new_age=age,new_gender=gender )
+        else:
+            new_user = Users(name=name, email=email, password=password, conf_password=conf_password, age=age, gender=gender)
+            mysession.add(new_user)
+            mysession.commit()
 
         return render_template('content/login.html')
     
@@ -123,7 +123,7 @@ def edit():
         return render_template('content/edit.html')
     userid = session['user_id']
     user = mysession.query(Users).filter_by(id=userid).first()
-    return render_template('content/edit.html', name = user.name, email = user.email, age = user.age, gender = user.gender)
+    return render_template('content/edit.html', name = user.name, email = user.email, age = user.age, gender = user.gender , password = user.password , conf_password = user.conf_password)
 
 @app.route('/edit/submit', methods=['GET', 'POST'], strict_slashes=False)
 def edit_submit():
@@ -138,7 +138,7 @@ def edit_submit():
         user_to_update.conf_password = request.form['conf_password']
         mysession.commit()
         if user_to_update.password != user_to_update.conf_password:
-            return "Password and confirmation password do not match. Please try again."
+            return render_template('content/edit.html', error ='Invalid email or password. Please try again.', name = user_to_update.name, email = user_to_update.email, age = user_to_update.age, gender = user_to_update.gender)
     
     flash('User updated successfully!', 'success')
     return redirect(url_for('account'))        
