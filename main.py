@@ -180,9 +180,21 @@ def account():
 
 @app.route('/programs', strict_slashes=False)
 def programs():
-    userid = session['user_id']
-    user = mysession.query(Users).filter_by(id=userid).first()
-    return render_template('content/programs.html',name = user.name)
+    userid = session['user_id']  # Fetch the logged-in user's ID
+    user = mysession.query(Users).filter_by(id=userid).first()  # Get the user
+
+    # Query all programs for the user
+    programs = mysession.query(Programs.program_text).filter_by(user_id=userid).all()
+
+    # Check if the user has any programs
+    if programs:
+        program_texts = [program.program_text for program in programs]  # Extract all program texts
+    else:
+        program_texts = []
+
+    # Pass the list of programs to the template
+    return render_template('content/programs.html', name=user.name, programs=program_texts)
+
 
 if __name__ == "__main__":
     """ Main Function """
