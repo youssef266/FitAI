@@ -178,6 +178,11 @@ def account():
     user = mysession.query(Users).filter_by(id=userid).first()
     return render_template('content/account.html',name = user.name , email = user.email , age = user.age )
 
+@app.route('/programs', strict_slashes=False)
+def programs():
+    userid = session['user_id']
+    user = mysession.query(Users).filter_by(id=userid).first()
+    return render_template('content/programs.html',name = user.name)
 
 if __name__ == "__main__":
     """ Main Function """

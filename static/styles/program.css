@@ -1,0 +1,33 @@
+.text-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.textbox {
+    width: 30%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.textbox h2 {
+    color: #333;
+}
+
+.textbox p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.textbox::-webkit-scrollbar {
+    width: 6px;
+}
+
+.textbox::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 10px;
+}
