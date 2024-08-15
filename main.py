@@ -180,21 +180,33 @@ def account():
     return render_template('content/account.html',name = user.name , email = user.email , age = user.age )
 
 @app.route('/programs', strict_slashes=False)
+@app.route('/programs', strict_slashes=False)
 def programs():
-    userid = session['user_id']  # Fetch the logged-in user's ID
-    user = mysession.query(Users).filter_by(id=userid).first()  # Get the user
+    userid = session.get('user_id')
+    user = mysession.query(Users).filter_by(id=userid).first()
+
+    # Get the current page number from the request arguments, default to 1 if not provided
+    page = request.args.get('page', 1, type=int)
+    per_page = 3
 
     # Query all programs for the user
-    programs = mysession.query(Programs.program_text).filter_by(user_id=userid).all()
+    programs_query = mysession.query(Programs).filter_by(user_id=userid)
 
-    # Check if the user has any programs
-    if programs:
-        program_texts = [program.program_text for program in programs]  # Extract all program texts
-    else:
-        program_texts = []
+    # Calculate total number of programs
+    total_programs = programs_query.count()
 
-    # Pass the list of programs to the template
-    return render_template('content/programs.html', name=user.name, programs=program_texts)
+    # Get the programs for the current page
+    programs = programs_query.offset((page - 1) * per_page).limit(per_page).all()
+
+    # Calculate total number of pages
+    total_pages = (total_programs + per_page - 1) // per_page
+
+    # Pass the programs and pagination info to the template
+    return render_template('content/programs.html',
+                           name=user.name,
+                           programs=[program.program_text for program in programs],
+                           page=page,
+                           total_pages=total_pages)
 
 
 if __name__ == "__main__":

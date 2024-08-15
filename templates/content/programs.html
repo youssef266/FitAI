@@ -1,15 +1,50 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-    <div class="text-container">
-        {% if programs %}
-            {% for program in programs %}
-                <div class="textbox">
-                    <!-- Display each program with proper formatting -->
-                    <pre style="white-space: pre-wrap;">{{ program }}</pre>
-                </div>
-            {% endfor %}
+<style>
+    .pagination {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.pagination a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.pagination a.prev,
+.pagination a.next {
+    font-weight: bold;
+}
+
+.pagination span {
+    margin: 0 10px;
+}
+
+</style>
+<div class="text-container">
+    {% if programs %}
+        {% for program in programs %}
+            <div class="textbox">
+                <!-- Display each program with proper formatting -->
+                <pre style="white-space: pre-wrap;">{{ program }}</pre>
+            </div>
+        {% endfor %}
+
+        <!-- Pagination controls -->
         {% else %}
-            <p>No programs available.</p>
+        <p>No programs available.</p>
+        {% endif %}
+    </div>
+    <div class="pagination">
+        {% if page > 1 %}
+            <a href="{{ url_for('programs', page=page - 1) }}" class="prev">Previous</a>
+        {% endif %}
+
+        <span>Page {{ page }} of {{ total_pages }}</span>
+
+        {% if page < total_pages %}
+            <a href="{{ url_for('programs', page=page + 1) }}" class="next">Next</a>
         {% endif %}
     </div>
 {% endblock %}
