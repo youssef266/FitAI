@@ -1,5 +1,23 @@
 {% extends "layouts/base.html" %}
 {% block content %}
+<style>
+  /* Style for the program select dropdown */
+.program-select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.program-select option {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #f1f1f1;
+}
+</style>
   <section class="contact_section layout_padding">
     <div class="container">
       <div class="layout_padding2-top">
@@ -8,11 +26,17 @@
             <form action="/service/generated" method="post">
               <div class="contact_form-container">
                 <div>
-                  <input type="text" id="program_type" name="program_type" placeholder="program_type" required><br><br>
+                  <!-- Dropdown for program type -->
+                  <select id="program_type" name="program_type" class="program-select" required>
+                    <option value="">Select program type</option>
+                    <option value="muscle gain Program">Muscle Gain Program</option>
+                    <option value="weight loss Program">Weight Loss Program</option>
+                  </select><br><br>
+
                   <input type="hidden" id="user_name" name="user_name" value="{{name}}">
                   <input type="hidden" id="user_age" name="user_age" value="{{age}}">
                   <input type="hidden" id="user_gender" name="user_gender" value="{{gender}}">
-                  <div class="mt-5">
+                  <div class="mt-1">
                     <button type="submit">
                       Generate
                     </button>
