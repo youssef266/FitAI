@@ -5,19 +5,33 @@
       <div class="layout_padding2-top">
         <div class="row">
           <div class="col-md-6 ">
-            {%if error%}
+
+            <!-- Check for flashed messages and display them -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}" style="color: red;" role="alert">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <!-- Check for error passed in the context and display it -->
+            {% if error %}
               <div class="alert alert-danger" role="alert">
-                {{error}}
+                {{ error }}
               </div>
-            {%endif%}
+            {% endif %}
+
             <form action="/login_save" method="POST">
               <div class="contact_form-container">
                 <div>
                   <div>
-                    <input type="email" placeholder="Email" name="email"/>
+                    <input type="email" placeholder="Email" name="email" required />
                   </div>
                   <div>
-                    <input type="password" placeholder="Password" name="password"/>
+                    <input type="password" placeholder="Password" name="password" required />
                   </div>
                   <div class="mt-5">
                     <button type="submit">
@@ -30,8 +44,8 @@
           </div>
           <div class="col-md-6">
             <div class="img-box">
-                <img src="{{ url_for('static', filename='images/about-img.png') }}" alt="">
-              </div>
+              <img src="{{ url_for('static', filename='images/about-img.png') }}" alt="">
+            </div>
           </div>
         </div>
       </div>
