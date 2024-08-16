@@ -117,10 +117,7 @@ def submit():
             new_user = Users(name=name, email=email, password=password, conf_password=conf_password, age=age, gender=gender)
             mysession.add(new_user)
             mysession.commit()
-
-        return render_template('content/login.html')
-    
-    return render_template('content/register.html')
+            return redirect(url_for('login'))
 
 
 @app.route('/edit', methods=['GET', 'POST'], strict_slashes=False)
@@ -173,7 +170,7 @@ def login_save():
 
         if user:
             session['user_id'] = user.id
-            return render_template('content/home.html', name=user.name)
+            return redirect(url_for('home')) 
         else:
             return render_template('content/login.html', error='Invalid email or password')
 
@@ -181,7 +178,8 @@ def login_save():
 @app.route('/logout', methods=['GET', 'POST'], strict_slashes=False)
 def logout():
     session.pop('user_id', None)
-    return render_template('content/home.html')
+    
+    return redirect(url_for('home'))
 
 
 @app.route('/account', strict_slashes=False)
