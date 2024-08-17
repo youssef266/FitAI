@@ -49,7 +49,7 @@ def about():
 def service():
     userid = session['user_id']
     user = mysession.query(Users).filter_by(id=userid).first()
-    return render_template('content/service.html', name=user.name, age=user.age, gender=user.gender)
+    return render_template('content/service.html', name=user.name, age=user.age, gender=user.gender,weight=user.weight, height=user.height)
 
 
 @app.route('/service/generated', methods=['GET', 'POST'], strict_slashes=False)
@@ -60,7 +60,9 @@ def AI_service():
         name = request.form['user_name']
         age = request.form['user_age']
         gender = request.form['user_gender']
-        prompt = f"give to me a. {program_type} my name is. {name} my age is. {age} my gender is. {gender}"
+        weight = request.form['user_weight']
+        height = request.form['user_height']
+        prompt = f"give to me a. {program_type} my name is. {name} my age is. {age} my gender is. {gender} my weight is. {weight}Kg my height is. {height}cm"
 
     userid = session['user_id']
     user = mysession.query(Users).filter_by(id=userid).first()
@@ -110,11 +112,13 @@ def submit():
         conf_password = request.form['conf_password']
         age = request.form['age']
         gender = request.form['gender']
+        weight = request.form['weight']
+        height = request.form['height']
 
         if password != conf_password:
-            return render_template('content/register.html', error='Passwords do not match', new_name=name, new_email=email, new_age=age, new_gender=gender)
+            return render_template('content/register.html', error='Passwords do not match', new_name=name, new_email=email, new_age=age, new_gender=gender, new_weight=weight, new_height=height)
         else:
-            new_user = Users(name=name, email=email, password=password, conf_password=conf_password, age=age, gender=gender)
+            new_user = Users(name=name, email=email, password=password, conf_password=conf_password, age=age, gender=gender, weight=weight, height=height)
             mysession.add(new_user)
             mysession.commit()
             return redirect(url_for('login'))
@@ -125,7 +129,7 @@ def submit():
 def edit():
     userid = session['user_id']
     user = mysession.query(Users).filter_by(id=userid).first()
-    return render_template('content/edit.html', name=user.name, email=user.email, age=user.age, gender=user.gender, password=user.password, conf_password=user.conf_password)
+    return render_template('content/edit.html', name=user.name, email=user.email, age=user.age, gender=user.gender,weight = user.weight, height = user.height ,password=user.password, conf_password=user.conf_password)
 
 
 @app.route('/edit/submit', methods=['GET', 'POST'], strict_slashes=False)
@@ -139,12 +143,11 @@ def edit_submit():
         user_to_update.email = request.form['email']
         user_to_update.age = request.form['age']
         user_to_update.gender = request.form['gender']
+        user_to_update.weight = request.form['weight']
+        user_to_update.height = request.form['height']
         user_to_update.password = request.form['password']
         user_to_update.conf_password = request.form['conf_password']
         mysession.commit()
-
-        if user_to_update.password != user_to_update.conf_password:
-            return render_template('content/edit.html', error='Passwords do not match', name=user_to_update.name, email=user_to_update.email, age=user_to_update.age, gender=user_to_update.gender)
 
     flash('User updated successfully!', 'success')
     return redirect(url_for('account'))

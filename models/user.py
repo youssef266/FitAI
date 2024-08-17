@@ -17,6 +17,8 @@ class Users(BaseModel, Base):
     conf_password = Column(String(80), nullable=False)
     age = Column(String(80), nullable=False)
     gender = Column(String(80), nullable=False)
+    weight = Column(String(80), nullable=False)
+    height = Column(String(80), nullable=False)
 
 engine = create_engine("sqlite:///youssef.db", echo=True)
 Base.metadata.create_all(bind=engine)
