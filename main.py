@@ -72,7 +72,7 @@ def AI_service():
         messages=[
             {"role": "user", "content": prompt}
         ],
-        model="llama-3.1-70b-versatile",
+        model="groq/compound-mini",
         max_tokens=1000
     )
     data = chat_completion.choices[0].message.content
