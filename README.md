@@ -23,4 +23,4 @@ To start using FitAI, follow these steps:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/YoussefTaha/FitAI.git
+   git clone https://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@github.com/youssef266/FitAI
