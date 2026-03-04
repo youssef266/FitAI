@@ -67,7 +67,7 @@ def AI_service():
     userid = session['user_id']
     user = mysession.query(Users).filter_by(id=userid).first()
 
-    client = Groq(api_key="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")
+    client = Groq(api_key="secret-key")
     chat_completion = client.chat.completions.create(
         messages=[
             {"role": "user", "content": prompt}
